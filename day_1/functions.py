@@ -11,11 +11,20 @@ def less_than(cutoff_val: int, values: List[int]) -> Tuple[List[int], bool]:
     # sprawdzamy czy wartosc jest mniejsza od cutoff
     # jezeli tak: dodaj do listy
     # jezeli nie: nie dodawaj, ustaw flage na True
-    pass
+    result = []
+    was_something_remove = False
+    for value in values:
+        if value < cutoff_val:
+            result.append(value)
+        else:
+            was_something_remove = True
+    return result, was_something_remove
+
 
 def is_palindrom(text):
     # funkcja powinna zwrócić wartość True jeśli zdanie jest palindrom i False jeśli nie.
-    pass
+    text = text.lower().replace(',', '').strip()
+    return text == text[::-1]
 
 
 def remove_duplicates(values):
@@ -26,4 +35,11 @@ def remove_duplicates(values):
 def safe_division(number: int, divisor: int, ignore_zero_division: bool=False) -> Union[float, int]:
     # funkcja na podstawie flagi ignore_zero_division powinno zwrócić float('inf') lub wyjątek
     # ignore_zero_division powinno domyślnie być False
-    pass
+    try:
+        return number / divisor
+    except ZeroDivisionError:
+        if ignore_zero_division:
+            return float('inf')
+        raise
+
+

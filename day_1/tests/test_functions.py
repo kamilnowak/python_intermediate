@@ -19,7 +19,7 @@ def test_format_number():
     assert format_phone_number(*data_list) == '+49 (0) 697-120-906'
 
 
-@pytest.mark.parametrize("input,expected", [
+@pytest.mark.parametrize("entry,expected", [
     ({
         'number': '697120906'
      }, '+48 (0) 697-120-906'),
@@ -28,17 +28,29 @@ def test_format_number():
         'area_code': '+49'
      }, '+49 (0) 697-120-906'),
 ])
-def test_format_number_advanced(input, expected):
-    assert format_phone_number(**input) == expected
+def test_format_number_advanced(entry, expected):
+    assert format_phone_number(**entry) == expected
 
 
-def test_less_than():
+@pytest.mark.parametrize("entry,expected", [
+    (
+        {
+            'cutoff_val': 5,
+            'values': [1, 2, 8]
+        }, ([1, 2], True)
+    ),
+    (
+        {
+            'cutoff_val': 7,
+            'values': [2, 4]
+        }, ([2, 4], False)
+    ),
+])
+def test_less_than(entry, expected):
     # TODO #3 popraw test ;)
-    data = {
-        'cutoff_val': 5,
-        'values': [1, 2, 8]
-    }
-    assert less_than(**data) == ([1, 2], True)
+    print(entry)
+    print(expected)
+    assert less_than(**entry) == expected
 
 
 @pytest.mark.parametrize("test_input,expected", [
