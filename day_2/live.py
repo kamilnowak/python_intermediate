@@ -1,12 +1,12 @@
 from collections import namedtuple
 from dataclasses import dataclass
 
-NumberInfo = namedtuple('NumberInfo', 'number area_code delimiter')
+NumberInfo = namedtuple('NumberInfo',
+                        'number area_code delimiter')
 number_namedtouple = NumberInfo('13321444', '+48', '-')
 # number_namedtouple.area_code
 
-
-@dataclass(frozen=True)
+@dataclass(frozen=False)
 class NumberInfoData:
     number: str
     area_code: str
